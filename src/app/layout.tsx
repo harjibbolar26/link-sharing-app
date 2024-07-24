@@ -8,6 +8,14 @@ const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Link Sharing App",
   description: "Generate a profile for your links and share them",
+  icons: {
+    icon: [
+      { url: '/logo.png' },
+    ],
+    apple: [
+      { url: '/logo.png' },
+    ],
+  },
 };
 
 export default function RootLayout({
