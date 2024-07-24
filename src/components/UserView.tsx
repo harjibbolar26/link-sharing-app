@@ -5,8 +5,10 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "@/firebase/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import { PlatformColors } from "./constant";
+import { PlatformColors, PlatformIcons } from "./constant";
 import { usePathname } from "next/navigation";
+import { FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
 
 const UserView = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -97,45 +99,38 @@ const UserView = () => {
                 <div className="border border-border bg-border w-20 h-2 rounded-xl z-10"></div>
               )}
             </div>
-            <div className="mt-16 flex flex-col gap-5 bg-[]">
+            <div className="mt-10 flex flex-col gap-5 z-10 overflow-auto h-52 hide-scrollbar">
               {links && links.length > 0 ? (
-                links.map((link) => (
-                  <div
-                    className={`bg-${
-                      link.platform === "Github"
-                        ? "[#1A1A1A]"
-                        : link.platform === "Twitter"
-                        ? "[#43B7E9]"
-                        : link.platform === "LinkedIn"
-                        ? "[#2D68FF]"
-                        : link.platform === "Youtube"
-                        ? "[#EE3939]"
-                        : link.platform === "Facebook"
-                        ? "[#2442AC]"
-                        : link.platform === "Twitch"
-                        ? "[#EE3FC8]"
-                        : link.platform === "Dev.to"
-                        ? "[#333333]"
-                        : link.platform === "Codewars"
-                        ? "[#8A1A50]"
-                        : link.platform === "Codepen"
-                        ? "[#000000]"
-                        : link.platform === "freeCodeCamp"
-                        ? "[#302267]"
-                        : link.platform === "GitLab"
-                        ? "[#EB4925]"
-                        : link.platform === "Hashnode"
-                        ? "[#0330D1]"
-                        : link.platform === "Stack Overflow"
-                        ? "[#EC7100]"
-                        : "grey-400"
-                      // PlatformColors[link.platform] || "gray-400"
-                    } w-52 h-8 rounded-md z-10 text-white flex items-center justify-center`}
-                    key={link.platform}
-                  >
-                    {link.platform}
-                  </div>
-                ))
+                links.map((link) => {
+                  const Icon = PlatformIcons[link.platform];
+                  return (
+                    <div
+                      className={`${
+                        PlatformColors[link.platform] || "gray-400"
+                      } w-52 p-4 rounded-md z-10 ${
+                        link.platform === "Frontend Mentor"
+                          ? "text-black"
+                          : "text-white"
+                      } flex items-center justify-between gap-2 text-base`}
+                      key={link.platform}
+                    >
+                      <div className="flex justify-start items-center gap-2">
+                        <Icon />
+                        {link.platform}
+                      </div>
+                      <Link
+                        className={`${
+                          link.platform === "Frontend Mentor"
+                            ? "text-black"
+                            : "text-white"
+                        } cursor-pointer`}
+                        href={`${link.url}`}
+                      >
+                        <FaArrowRight />
+                      </Link>
+                    </div>
+                  );
+                })
               ) : (
                 <>
                   <div className="border border-border bg-border w-52 h-8 rounded-md z-10"></div>

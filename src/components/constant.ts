@@ -43,17 +43,35 @@ export const PlatformOptions: PlatformOption[] = [
 ];
 
 export const PlatformColors: { [key: string]: string } = {
-    "Github": "[#1A1A1A]",
-    "Twitter": "[#43B7E9",
-    "LinkedIn": "[#2D68FF", // Example additional colors
-    "Youtube": "[#EE3939", // Example additional colors
-    "Facebook": "[#2442AC]", // Example additional colors
-    "Twitch": "[#EE3FC8]", // Example additional colors
-    "Dev.to": "[#333333]", // Example additional colors
-    "Codewars": "[#8A1A50]", // Example additional colors
-    "Codepen": "[yellow-400]", // Example additional colors
-    "freeCodeCamp": "[#302267]", // Example additional colors
-    "GitLab": "[#EB4925]", // Example additional colors
-    "Hashnode": "[#0330D1]", // Example additional colors
-    "Stack Overflow": "[#EC7100]", // Example additional colors
-  };
+  "Github": "bg-[#1A1A1A]",
+  "Frontend Mentor": "bg-[#FFFFFF]",
+  "Twitter": "bg-[#43B7E9]",
+  "LinkedIn": "bg-[#2D68FF]",
+  "Youtube": "bg-[#EE3939]",
+  "Facebook": "bg-[#2442AC]",
+  "Twitch": "bg-[#EE3FC8]",
+  "Dev.to": "bg-[#333333]",
+  "Codewars": "bg-[#8A1A50]",
+  "Codepen": "bg-[#000000]",
+  "freeCodeCamp": "bg-[#302267]",
+  "GitLab": "bg-[#EB4925]",
+  "Hashnode": "bg-[#0330D1]",
+  "Stack Overflow": "bg-[#EC7100]",
+};
+
+export const PlatformIcons: { [key: string]: IconType } = {
+  "Github": TbBrandGithubFilled,
+  "Frontend Mentor": SiFrontendmentor,
+  "Twitter": FaTwitter,
+  "LinkedIn": FaLinkedin,
+  "Youtube": FaYoutube,
+  "Facebook": FaFacebook,
+  "Twitch": FaTwitch,
+  "Dev.to": BiLogoDevTo,
+  "Codewars": SiCodewars,
+  "Codepen": FaCodepen,
+  "freeCodeCamp": FaFreeCodeCamp,
+  "GitLab": FaGitlab,
+  "Hashnode": FaHashnode,
+  "Stack Overflow": FaStackOverflow,
+};

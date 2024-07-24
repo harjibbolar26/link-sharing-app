@@ -7,6 +7,7 @@ import Input from "./Input";
 import { auth, db } from "@/firebase/firebase";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { FaLink, FaSave } from "react-icons/fa";
 
 const ProfilePage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -18,6 +19,7 @@ const ProfilePage: React.FC = () => {
   const [firstNameError, setFirstNameError] = useState<string>("");
   const [lastNameError, setLastNameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const [showNotification, setShowNotification] = useState<boolean>(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -35,9 +37,9 @@ const ProfilePage: React.FC = () => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       const data = docSnap.data();
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setEmail(data.email);
+      // setFirstName(data.firstName);
+      // setLastName(data.lastName);
+      // setEmail(data.email);
       setProfileImage(data.profileImage || null);
     } else {
       console.log("No such document!");
@@ -122,7 +124,10 @@ const ProfilePage: React.FC = () => {
         email,
         profileImage,
       });
-      alert("User data saved successfully");
+      setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 5000);
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -132,7 +137,7 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="px-8 pt-8 pb-4 bg-white w-full rounded-lg">
+    <div className="px-8 pt-8 pb-4 bg-white w-full rounded-lg relative">
       <div className="font-bold text-[32px] text-default mb-2">
         Profile Details
       </div>
@@ -155,7 +160,7 @@ const ProfilePage: React.FC = () => {
                   objectFit="cover"
                   className="blur-[1px]"
                 />
-                <div className="flex flex-col justify-center items-center h-48 gap-2 z-10 absolute top-3 left-10">
+                <div className="flex flex-col justify-center items-center h-48 gap-2 z-10 absolute top-3 left-8">
                   <Image
                     src="/imgHolder2.svg"
                     alt="img_holder"
@@ -268,6 +273,14 @@ const ProfilePage: React.FC = () => {
           handleClick={handleSave}
         />
       </div>
+      {showNotification && (
+        <div className="fixed bottom-4 bg-default text-white text-center py-2 px-4 w-fit rounded-xl flex items-center justify-center mx-auto left-1/2 transform -translate-x-1/2">
+          <div className="flex justify-start items-center gap-2 text-base">
+            <FaSave className="text-grey"/>
+            Your changes have been successfully saved!
+          </div>
+        </div>
+      )}
     </div>
   );
 };
