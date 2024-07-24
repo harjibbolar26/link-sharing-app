@@ -8,6 +8,7 @@ import CustomDropdown from "./CustomDropdown";
 import { auth, db } from "@/firebase/firebase";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import {useRouter} from "next/navigation"
 
 interface Link {
   platform: string;
@@ -40,7 +41,13 @@ const RightDetails: React.FC = () => {
     }
   };
 
+  const router = useRouter()
+
   const addNewLink = () => {
+    if (!userId) {
+      router.push("/login"); 
+      return;
+    }
     setLinks([...links, { platform: "", url: "" }]);
   };
 
@@ -124,7 +131,7 @@ const RightDetails: React.FC = () => {
               Let&apos;s get you started
             </div>
             <div className="text-[16px] text-default leading-[24px]">
-              Use the "Add new link" button to get started. Once you have more
+              Use the &quot;Add new link&quot; button to get started. Once you have more
               than one link, you can reorder and edit them. We&apos;re here to
               help you share your profiles with everyone!
             </div>
