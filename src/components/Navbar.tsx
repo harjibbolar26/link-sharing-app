@@ -25,6 +25,7 @@ const Navbar = () => {
     if (user) {
       return `/user/${user.uid}`;
     } else {
+      // alert("Not logged in. You'll be redirected to login page")
       return "/login";
     }
   };
@@ -33,6 +34,7 @@ const Navbar = () => {
     if (user) {
       return `/profile`;
     } else {
+      // alert("Not logged in. You'll be redirected to login page")
       return "/login";
     }
   };
@@ -85,7 +87,7 @@ const Navbar = () => {
             <p className="text-base max-sm:hidden block">Links</p>
           </Link>
           <Link
-            href="/profile"
+            href={profileLink()}
             className={`text-default hover:text-primary flex items-center gap-2 ${
               pathname === "/profile"
                 ? "bg-secondary py-[11px] px-[27px] rounded-lg text-primary"
@@ -116,7 +118,7 @@ const Navbar = () => {
         )}
       </div>
       {showNotification && (
-        <div className="fixed bottom-4 bg-default text-white text-center py-2 px-4 w-fit rounded-xl flex items-center justify-center mx-auto left-1/2 transform -translate-x-1/2">
+        <div className="fixed bottom-4 bg-default text-white text-center py-2 px-4 w-fit rounded-xl flex items-center justify-center mx-auto left-1/2 transform -translate-x-1/2 z-30">
           <div className="flex justify-start items-center gap-2 text-base">
             <FaLink className="text-grey"/>
             The link has been copied to your clipboard!

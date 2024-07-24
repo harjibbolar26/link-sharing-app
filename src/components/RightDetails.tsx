@@ -56,6 +56,7 @@ const RightDetails: React.FC = () => {
   const addNewLink = () => {
     if (!userId) {
       router.push("/login");
+      alert("Not logged in. You'll be redirected to login page")
       return;
     }
     setLinks([...links, { platform: "", url: "" }]);
@@ -235,7 +236,7 @@ const RightDetails: React.FC = () => {
           textColor="white"
           value="Save"
           otheClasses="mt-5 py-1 px-4"
-          disabled={!isSaveEnabled}
+          disabled={!isSaveEnabled || links.length === 0} 
           handleClick={handleSave}
         />
       </div>

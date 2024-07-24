@@ -124,7 +124,7 @@ const UserView = () => {
                             ? "text-black"
                             : "text-white"
                         } cursor-pointer`}
-                        href={`${link.url}`}
+                        href={`${link.url}`} target="blank"
                       >
                         <FaArrowRight />
                       </Link>

@@ -110,6 +110,7 @@ const Newwww: React.FC = () => {
                             : "text-white"
                         } cursor-pointer`}
                         href={`${link.url}`}
+                        target="blank"
                       >
                         <FaArrowRight />
                       </Link>
