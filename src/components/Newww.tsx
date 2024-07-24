@@ -6,10 +6,23 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import Image from "next/image";
 
+interface Link {
+  platform: string;
+  url: string;
+}
+
+interface ProfileData {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  profileImage?: string;
+  links?: Link[];
+}
+
 const Newwww: React.FC = () => {
   const params = useParams();
   const userId = params.userId as string;
-  const [profileData, setProfileData] = useState<any>(null);
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
 
   useEffect(() => {
     if (userId) {
@@ -18,7 +31,7 @@ const Newwww: React.FC = () => {
           const docRef = doc(db, "users", userId);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            setProfileData(docSnap.data());
+            setProfileData(docSnap.data() as ProfileData);
           } else {
             console.log("No such document!");
           }
@@ -33,32 +46,6 @@ const Newwww: React.FC = () => {
   if (!profileData) return <div>Loading...</div>;
 
   return (
-    // <div className="profile-preview">
-    //   <h1>
-    //     {profileData.firstName} {profileData.lastName}
-    //   </h1>
-    //   {profileData.profileImage && (
-    //     <Image
-    //       src={profileData.profileImage}
-    //       alt="Profile Picture"
-    //       width={150}
-    //       height={150}
-    //     />
-    //   )}
-    //   <p>Email: {profileData.email}</p>
-    //   <div>
-    //     <h2>Links</h2>
-    //     {profileData.links &&
-    //       profileData.links.map((link: any, index: number) => (
-    //         <div key={index}>
-    //           <p>Platform: {link.platform}</p>
-    //           <a href={link.url} target="_blank" rel="noopener noreferrer">
-    //             {link.url}
-    //           </a>
-    //         </div>
-    //       ))}
-    //   </div>
-    // </div>
     <div
       className={`bg-white w-full p-2 flex justify-center items-start overflow-hidden rounded-lg`}
       style={{ height: "calc(100vh - 136px)" }}
@@ -96,7 +83,7 @@ const Newwww: React.FC = () => {
             </div>
             <div className="mt-16 flex flex-col gap-5 bg-[]">
               {profileData && profileData.links && profileData.links.length > 0 ? (
-                profileData.links.map((link) => (
+                profileData.links.map((link: Link) => (
                   <div
                     className={`bg-${
                       link.platform === "Github"
