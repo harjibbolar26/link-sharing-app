@@ -44,10 +44,6 @@ const ProfileLink = () => {
       }
     });
   }, []);
-  const domainUrl = window.location.origin;
-  // console.log(domainUrl);
-  const userProfileLink = `${domainUrl}/profile/${userId}`;
-  console.log(userProfileLink);
 
   return (
     <div
