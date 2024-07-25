@@ -231,7 +231,7 @@ const AddLinks: React.FC = () => {
                     type="text"
                     value={link.url}
                     onChange={(e) => updateLink(index, "url", e.target.value)}
-                    className="block w-full p-2 rounded-md focus:outline-none text-default px-2 text-sm bg-transparent"
+                    className="block w-full p-1 rounded-md focus:outline-none text-default px-2 text-sm bg-transparent"
                     placeholder="e.g. https://www.github.com/johnappleseed"
                   />
                   {link.urlError && (

@@ -164,7 +164,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="px-8 pt-8 pb-4 bg-white w-full rounded-lg relative">
+      <div className="px-8 pt-8 pb-20 mb-4 bg-white w-full rounded-lg relative">
         <div className="font-bold text-[32px] text-default mb-2">
           Profile Details
         </div>
@@ -288,7 +288,8 @@ const ProfilePage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="fixed bottom-0 pb-4 bg-white lg:w-[60%] w-full">
+      </div>
+      <div className="fixed bottom-0 pb-4 bg-white lg:w-[60%] w-full">
         <hr style={{ marginTop: 20 }} />
         <div className="flex justify-end mr-16">
           <Button
@@ -301,7 +302,6 @@ const ProfilePage: React.FC = () => {
             handleClick={handleSave}
           />
         </div>
-      </div>
       </div>
       {showNotification && (
         <div className="fixed bottom-4 bg-default text-white text-center py-2 px-4 w-fit rounded-xl flex items-center justify-center mx-auto left-1/2 transform -translate-x-1/2">
