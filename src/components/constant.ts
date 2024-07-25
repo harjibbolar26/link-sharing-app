@@ -25,7 +25,7 @@ export const PlatformOptions: PlatformOption[] = [
   { display: "Github", value: "Github", icon: TbBrandGithubFilled },
   {
     display: "Frontend Mentor",
-    value: "FrontendMentor",
+    value: "Frontend Mentor",
     icon: SiFrontendmentor,
   },
   { display: "Twitter", value: "Twitter", icon: FaTwitter },
@@ -39,7 +39,7 @@ export const PlatformOptions: PlatformOption[] = [
   { display: "freeCodeCamp", value: "freeCodeCamp", icon: FaFreeCodeCamp },
   { display: "GitLab", value: "GitLab", icon: FaGitlab },
   { display: "Hashnode", value: "Hashnode", icon: FaHashnode },
-  { display: "Stack Overflow", value: "StackOverflow", icon: FaStackOverflow },
+  { display: "Stack Overflow", value: "Stack Overflow", icon: FaStackOverflow },
 ];
 
 export const PlatformColors: { [key: string]: string } = {

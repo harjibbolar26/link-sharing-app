@@ -22,7 +22,7 @@ interface ProfileData {
   links?: Link[];
 }
 
-const Newwww: React.FC = () => {
+const UserLink: React.FC = () => {
   const params = useParams();
   const userId = params.userId as string;
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
@@ -133,4 +133,4 @@ const Newwww: React.FC = () => {
   );
 };
 
-export default Newwww;
+export default UserLink;

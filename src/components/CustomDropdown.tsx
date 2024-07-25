@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IconType } from "react-icons";
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
 interface PlatformOption {
   display: string;
@@ -32,7 +33,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   return (
     <div className="relative">
       <button
-        className="w-full p-2 border border-gray-300 rounded-md flex items-center justify-between"
+        className="w-full p-2 border border-border rounded-md flex items-center justify-between focus:border-primary"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedOption ? (
@@ -45,14 +46,22 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         ) : (
           "Select platform"
         )}
-        <span className="ml-2">&#9662;</span>
+        {isOpen ? (
+          <span className="ml-2 text-primary">
+            <MdKeyboardArrowUp size={25} />
+          </span>
+        ) : (
+          <span className="ml-2 text-primary">
+            <MdKeyboardArrowDown size={25} />
+          </span>
+        )}
       </button>
       {isOpen && (
-        <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1">
+        <div className="absolute z-10 w-full bg-white border border-border rounded-md mt-1">
           {options.map((option) => (
             <div key={option.value} className="p-2">
               <div
-                className="p-2 cursor-pointer flex items-center hover:bg-gray-100 "
+                className="p-2 cursor-pointer flex items-center hover:text-primary"
                 onClick={() => handleSelect(option)}
               >
                 {React.createElement(option.icon, {

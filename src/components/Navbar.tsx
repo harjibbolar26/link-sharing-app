@@ -47,7 +47,7 @@ const Navbar = () => {
         setShowNotification(true);
         setTimeout(() => {
           setShowNotification(false);
-        }, 5000);
+        }, 3500);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
@@ -67,10 +67,10 @@ const Navbar = () => {
             <p className="text-base">Back to Editor</p>
           </Link>
         ) : (
-          <div className="flex gap-2 items-center">
+          <Link href={"/"} className="flex gap-2 items-center">
             <Image src="/logo.png" alt="logo" height={33} width={33} />
             <div className="text-default font-bold text-2xl">devlinks</div>
-          </div>
+          </Link>
         )}
         <div
           className={`${isProfilePage ? "hidden" : "flex"} gap-4 items-center`}
@@ -120,7 +120,7 @@ const Navbar = () => {
       {showNotification && (
         <div className="fixed bottom-4 bg-default text-white text-center py-2 px-4 w-fit rounded-xl flex items-center justify-center mx-auto left-1/2 transform -translate-x-1/2 z-30">
           <div className="flex justify-start items-center gap-2 text-base">
-            <FaLink className="text-grey"/>
+            <FaLink className="text-grey" />
             The link has been copied to your clipboard!
           </div>
         </div>

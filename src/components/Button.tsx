@@ -11,7 +11,7 @@ interface buttonProps {
   children?: React.ReactNode;
   disabled?: boolean;
   handleClick?: () => void;
-  type?:  "submit" | "reset" | "button" | undefined
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
 const Button: React.FC<buttonProps> = ({
@@ -24,11 +24,12 @@ const Button: React.FC<buttonProps> = ({
   hover,
   children,
   disabled,
-  handleClick, type
+  handleClick,
+  type,
 }) => {
   return (
     <button
-      className={`bg-${bgColor} w-${width} rounded-${radius} text-${textColor} ${otheClasses} hover:${hover} `}
+      className={`bg-${bgColor} w-${width} rounded-${radius} text-${textColor} ${otheClasses} hover:${hover}`}
       disabled={disabled}
       onClick={handleClick}
       type={type}

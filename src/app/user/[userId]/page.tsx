@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import React from "react";
-import Newwww from "@/components/Newww";
+import UserLink from "@/components/UserLink";
 
 const Preview = () => {
   return (
@@ -9,7 +9,7 @@ const Preview = () => {
         <Navbar />
       </div>
       <div className="flex justify-center items-center mt-[-100px] w-fit mx-auto">
-        <Newwww />
+        <UserLink />
       </div>
     </div>
   );

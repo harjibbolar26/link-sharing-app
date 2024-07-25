@@ -9,12 +9,8 @@ export const metadata: Metadata = {
   title: "Link Sharing App",
   description: "Generate a profile for your links and share them",
   icons: {
-    icon: [
-      { url: '/logo.png' },
-    ],
-    apple: [
-      { url: '/logo.png' },
-    ],
+    icon: [{ url: "/logo.png" }],
+    apple: [{ url: "/logo.png" }],
   },
 };
 
@@ -26,9 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={instrumentSans.className}>
-        {/* <UserProvider> */}
-          {children}
-          {/* </UserProvider> */}
+        <UserProvider>{children}</UserProvider>
       </body>
     </html>
   );

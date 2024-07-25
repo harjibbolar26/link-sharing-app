@@ -9,52 +9,31 @@ import { PlatformColors, PlatformIcons } from "./constant";
 import { usePathname } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import { useUser } from "./UserContext";
+
+interface Link {
+  platform: string;
+  url: string;
+}
+
+interface UserData {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  profileImage?: string;
+  links?: Link[];
+}
 
 const UserView = () => {
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [userId, setUserId] = useState<string>("");
-  const [links, setLinks] = useState<
-    {
-      platform: string;
-      url: string;
-    }[]
-  >([]);
+  const { userData } = useUser();
 
-  const fetchUserData = async (uid: string) => {
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      setFirstName(data.firstName);
-      setLastName(data.lastName);
-      setEmail(data.email);
-      setProfileImage(data.profileImage || null);
-      setLinks(data.links);
-    } else {
-      console.log("No such document!");
-    }
-  };
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(user.uid);
-        fetchUserData(user.uid);
-      } else {
-        console.log("No user is signed in.");
-      }
-    });
-  }, []);
   const pathname = usePathname();
   return (
     <div
       className={`bg-white w-full h-full p-10 lg:flex justify-center items-start rounded-lg hidden`}
       // style={{ height: "calc(100vh - 136px)" }}
     >
-      <div className="relative w-[300px] h-[600px] top-0">
+      <div className="relative w-[300px] h-[600px]">
         <Image
           src="/mobile.png"
           alt="mobile"
@@ -71,10 +50,10 @@ const UserView = () => {
             className=""
           />
           <div className="absolute w-full h-full flex flex-col gap-4 justify-start top-20 items-center">
-            {profileImage ? (
+            {userData && userData.profileImage ? (
               <div className="border border-border bg-border w-24 h-24 rounded-full z-10 relative">
                 <Image
-                  src={profileImage}
+                  src={userData.profileImage}
                   alt="profile_image"
                   layout="fill"
                   objectFit="cover"
@@ -86,23 +65,33 @@ const UserView = () => {
             )}
 
             <div className="flex flex-col gap-1 items-center">
-              {firstName && lastName ? (
+              {userData && userData.firstName && userData.lastName ? (
                 <div className="z-10 text-[18px] font-[600]">
-                  {firstName} {lastName}
+                  {userData.firstName} {userData.lastName}
                 </div>
               ) : (
                 <div className="border border-border bg-border w-32 h-4 rounded-xl z-10"></div>
               )}
-              {email ? (
-                <div className="z-10 text-[14px] font-[400]">{email}</div>
+              {userData && userData.email ? (
+                <div className="z-10 text-[14px] font-[400]">
+                  {userData.email}
+                </div>
               ) : (
                 <div className="border border-border bg-border w-20 h-2 rounded-xl z-10"></div>
               )}
             </div>
             <div className="mt-10 flex flex-col gap-5 z-10 overflow-auto h-52 hide-scrollbar">
-              {links && links.length > 0 ? (
-                links.map((link) => {
+              {userData && userData.links && userData.links.length > 0 ? (
+                userData.links.map((link) => {
                   const Icon = PlatformIcons[link.platform];
+                  console.log("link.platform:", link.platform);
+                  console.log("Icon:", Icon);
+                  if (!Icon) {
+                    console.error(
+                      `Icon not found for platform: ${link.platform}`
+                    );
+                    return null;
+                  }
                   return (
                     <div
                       className={`${
@@ -111,6 +100,10 @@ const UserView = () => {
                         link.platform === "Frontend Mentor"
                           ? "text-black"
                           : "text-white"
+                      } border ${
+                        link.platform === "Frontend Mentor"
+                          ? "border-border"
+                          : "border-transparent"
                       } flex items-center justify-between gap-2 text-base`}
                       key={link.platform}
                     >
@@ -124,7 +117,8 @@ const UserView = () => {
                             ? "text-black"
                             : "text-white"
                         } cursor-pointer`}
-                        href={`${link.url}`} target="blank"
+                        href={`${link.url}`}
+                        target="blank"
                       >
                         <FaArrowRight />
                       </Link>
